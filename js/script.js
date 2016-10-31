@@ -52,7 +52,6 @@ $(function () {
                 sec = min * 60;
                 idIntervalSeconds = setInterval(function () {
                     sec--;
-                    console.log(sec)
                     if (sec % 60 >= 10) {
                         $(".countdown").text(Math.floor(sec / 60) + ":" + sec % 60);
                     } else {
@@ -114,7 +113,7 @@ $(function () {
     }
 
     function hideAddSubButtons() {
-        !(isOn) ? $(".js-minus,.js-plus").hide(): $(".js-minus,.js-plus").show()
+        !(isOn) ? $(".js-minus,.js-plus").fadeOut(): $(".js-minus,.js-plus").fadeIn()
     }
 
     addMinute();
