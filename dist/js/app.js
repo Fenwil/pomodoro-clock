@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -15,32 +15,31 @@ var PomodoroClock = function () {
         this.idIntervalMinutes = 0;
         this.idIntervalSeconds = 0;
         this.isOn = false;
-        this.audio = new Audio('../src/mp3/alarm.mp3');
-        this.$countdown = $(".countdown");
-        this.$addMinute = $(".js-plus");
-        this.$play = $(".js-play");
-        this.$stop = $(".js-stop");
-        this.$minusMinute = $(".js-minus");
-        this.$tomato = $(".tomato");
+        this.$countdown = $('.countdown');
+        this.$addMinute = $('.js-plus');
+        this.$play = $('.js-play');
+        this.$stop = $('.js-stop');
+        this.$minusMinute = $('.js-minus');
+        this.$tomato = $('.tomato');
     }
 
     _createClass(PomodoroClock, [{
-        key: "setTimer",
+        key: 'setTimer',
         value: function setTimer(time) {
-            this.$countdown.text(time + ":00");
+            this.$countdown.text(time + ':00');
         }
     }, {
-        key: "activate",
+        key: 'activate',
         value: function activate() {
             this.isOn = true;
         }
     }, {
-        key: "deactivate",
+        key: 'deactivate',
         value: function deactivate() {
             this.isOn = false;
         }
     }, {
-        key: "addMinute",
+        key: 'addMinute',
         value: function addMinute() {
             var _this = this;
             this.$addMinute.click(function () {
@@ -53,7 +52,7 @@ var PomodoroClock = function () {
             });
         }
     }, {
-        key: "substractMinute",
+        key: 'substractMinute',
         value: function substractMinute() {
             var _this = this;
             this.$minusMinute.click(function () {
@@ -66,7 +65,7 @@ var PomodoroClock = function () {
             });
         }
     }, {
-        key: "start",
+        key: 'start',
         value: function start() {
             var _this2 = this;
 
@@ -80,9 +79,9 @@ var PomodoroClock = function () {
                     _this.idIntervalSeconds = setInterval(function () {
                         _this.seconds--;
                         if (_this.seconds % 60 >= 10) {
-                            _this2.$countdown.text(Math.floor(_this.seconds / 60) + ":" + _this.seconds % 60);
+                            _this2.$countdown.text(Math.floor(_this.seconds / 60) + ':' + _this.seconds % 60);
                         } else {
-                            _this2.$countdown.text(Math.floor(_this.seconds / 60) + ":0" + _this.seconds % 60);
+                            _this2.$countdown.text(Math.floor(_this.seconds / 60) + ':0' + _this.seconds % 60);
                         }
                         _this.degrees += 0.0983;
                         _this.rotate(_this.degrees);
@@ -96,26 +95,26 @@ var PomodoroClock = function () {
             });
         }
     }, {
-        key: "rotate",
+        key: 'rotate',
         value: function rotate(deg) {
-            this.$tomato.css("-webkit-transform", "rotate(" + deg + "deg)");
-            this.$tomato.css("-moz-transform", "rotate(" + deg + "deg)");
-            this.$tomato.css("-ms-transform", "rotate(" + deg + "deg)");
-            this.$tomato.css("-o-transform", "rotate(" + deg + "deg)");
-            this.$tomato.css("transform", "rotate(" + deg + "deg)");
+            this.$tomato.css('-webkit-transform', 'rotate(' + deg + 'deg)');
+            this.$tomato.css('-moz-transform', 'rotate(' + deg + 'deg)');
+            this.$tomato.css('-ms-transform', 'rotate(' + deg + 'deg)');
+            this.$tomato.css('-o-transform', 'rotate(' + deg + 'deg)');
+            this.$tomato.css('transform', 'rotate(' + deg + 'deg)');
         }
     }, {
-        key: "finish",
+        key: 'finish',
         value: function finish(sec, idIntMin, idIntSec) {
             if (sec === 0) {
                 clearInterval(idIntMin);
                 clearInterval(idIntSec);
                 this.soundAlarm();
                 this.restartValues();
-            };
+            }
         }
     }, {
-        key: "stop",
+        key: 'stop',
         value: function stop() {
             var _this = this;
             this.$stop.click(function () {
@@ -128,12 +127,12 @@ var PomodoroClock = function () {
             });
         }
     }, {
-        key: "soundAlarm",
+        key: 'soundAlarm',
         value: function soundAlarm() {
-            this.audio.play();
+            $('audio').get(0).play();
         }
     }, {
-        key: "restartValues",
+        key: 'restartValues',
         value: function restartValues() {
             this.minutes = 0;
             this.seconds = 0;
@@ -145,9 +144,9 @@ var PomodoroClock = function () {
             this.setTimer(this.minutes);
         }
     }, {
-        key: "hideAddSubButtons",
+        key: 'hideAddSubButtons',
         value: function hideAddSubButtons() {
-            !this.isOn ? $(".js-minus,.js-plus").fadeOut() : $(".js-minus,.js-plus").fadeIn();
+            !this.isOn ? $('.js-minus,.js-plus').fadeOut() : $('.js-minus,.js-plus').fadeIn();
         }
     }]);
 
