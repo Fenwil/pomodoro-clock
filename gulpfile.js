@@ -16,11 +16,11 @@ gulp.task('transpile-js', () => {
 
 gulp.task('minify-js', function (cb) {
   pump([
-      gulp.src('dist/js/app.js'),
-      uglify(),
-      rename('app.min.js'),
-      gulp.dest('dist/js')
-    ],
+    gulp.src('dist/js/app.js'),
+    uglify(),
+    rename('app.min.js'),
+    gulp.dest('dist/js')
+  ],
         cb
     )
 })
@@ -39,3 +39,10 @@ gulp.task('minify-img', () =>
     .pipe(imagemin())
     .pipe(gulp.dest('dist/img'))
 )
+
+gulp.task('default', ['transpile-js', 'minify-js', 'minify-css', 'minify-img'], () => {
+  gulp.watch('src/js/app.js', ['transpile-js'])
+  gulp.watch('dist/js/app.js', ['minify-js'])
+  gulp.watch('src/css/styles.css', ['minify-css'])
+  gulp.watch('src/img/*.svg', ['minify-img'])
+})
