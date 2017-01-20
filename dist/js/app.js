@@ -42,6 +42,7 @@ var PomodoroClock = function () {
     key: 'addMinute',
     value: function addMinute() {
       var _this = this;
+
       this.$addMinute.click(function () {
         if (!_this.isOn && _this.minutes < 60) {
           _this.degrees -= 5.9;
@@ -54,42 +55,42 @@ var PomodoroClock = function () {
   }, {
     key: 'substractMinute',
     value: function substractMinute() {
-      var _this = this;
+      var _this2 = this;
+
       this.$minusMinute.click(function () {
-        if (!_this.isOn && _this.minutes > 0 && _this.minutes < 60) {
-          _this.degrees += 5.9;
-          _this.minutes -= 1;
-          _this.rotate(_this.degrees);
-          _this.setTimer(_this.minutes);
+        if (!_this2.isOn && _this2.minutes > 0 && _this2.minutes < 60) {
+          _this2.degrees += 5.9;
+          _this2.minutes -= 1;
+          _this2.rotate(_this2.degrees);
+          _this2.setTimer(_this2.minutes);
         }
       });
     }
   }, {
     key: 'start',
     value: function start() {
-      var _this2 = this;
+      var _this3 = this;
 
-      var _this = this;
       this.$play.click(function () {
-        if (!_this.isOn && _this.minutes > 0 && _this.minutes < 60) {
-          _this.hideAddSubButtons();
-          _this.activate();
-          _this.mseconds = _this.minutes * 60000;
-          _this.seconds = _this.minutes * 60;
-          _this.idIntervalSeconds = setInterval(function () {
-            _this.seconds--;
-            if (_this.seconds % 60 >= 10) {
-              _this2.$countdown.text(Math.floor(_this.seconds / 60) + ':' + _this.seconds % 60);
+        if (!_this3.isOn && _this3.minutes > 0 && _this3.minutes < 60) {
+          _this3.hideAddSubButtons();
+          _this3.activate();
+          _this3.mseconds = _this3.minutes * 60000;
+          _this3.seconds = _this3.minutes * 60;
+          _this3.idIntervalSeconds = setInterval(function () {
+            _this3.seconds--;
+            if (_this3.seconds % 60 >= 10) {
+              _this3.$countdown.text(Math.floor(_this3.seconds / 60) + ':' + _this3.seconds % 60);
             } else {
-              _this2.$countdown.text(Math.floor(_this.seconds / 60) + ':0' + _this.seconds % 60);
+              _this3.$countdown.text(Math.floor(_this3.seconds / 60) + ':0' + _this3.seconds % 60);
             }
-            _this.degrees += 0.0983;
-            _this.rotate(_this.degrees);
-            _this.finish(_this.seconds, _this.idIntervalMinutes, _this.idIntervalSeconds);
+            _this3.degrees += 0.0983;
+            _this3.rotate(_this3.degrees);
+            _this3.finish(_this3.seconds, _this3.idIntervalMinutes, _this3.idIntervalSeconds);
           }, 1000);
-          _this.idIntervalMinutes = setInterval(function () {
-            _this.minutes--;
-            _this.setTimer(_this.minutes);
+          _this3.idIntervalMinutes = setInterval(function () {
+            _this3.minutes--;
+            _this3.setTimer(_this3.minutes);
           }, 60000);
         }
       });
@@ -116,13 +117,14 @@ var PomodoroClock = function () {
   }, {
     key: 'stop',
     value: function stop() {
-      var _this = this;
+      var _this4 = this;
+
       this.$stop.click(function () {
-        if (_this.isOn) {
-          clearInterval(_this.idIntervalMinutes);
-          clearInterval(_this.idIntervalSeconds);
-          _this.restartValues();
-          _this.soundAlarm();
+        if (_this4.isOn) {
+          clearInterval(_this4.idIntervalMinutes);
+          clearInterval(_this4.idIntervalSeconds);
+          _this4.restartValues();
+          _this4.soundAlarm();
         }
       });
     }

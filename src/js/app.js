@@ -24,52 +24,49 @@ class PomodoroClock {
     this.isOn = false
   }
   addMinute () {
-    let _this = this
     this.$addMinute.click(() => {
-        if ((!_this.isOn) && _this.minutes < 60) {
-            _this.degrees -= 5.9
-            _this.minutes += 1
-            _this.rotate(_this.degrees)
-            _this.setTimer(_this.minutes)
-          }
-      })
+      if ((!this.isOn) && this.minutes < 60) {
+        this.degrees -= 5.9
+        this.minutes += 1
+        this.rotate(this.degrees)
+        this.setTimer(this.minutes)
+      }
+    })
   }
   substractMinute () {
-    let _this = this
     this.$minusMinute.click(() => {
-        if ((!_this.isOn) && _this.minutes > 0 && _this.minutes < 60) {
-            _this.degrees += 5.9
-            _this.minutes -= 1
-            _this.rotate(_this.degrees)
-            _this.setTimer(_this.minutes)
-          }
-      })
+      if ((!this.isOn) && this.minutes > 0 && this.minutes < 60) {
+        this.degrees += 5.9
+        this.minutes -= 1
+        this.rotate(this.degrees)
+        this.setTimer(this.minutes)
+      }
+    })
   }
   start () {
-    let _this = this
     this.$play.click(() => {
-        if ((!_this.isOn) && _this.minutes > 0 && _this.minutes < 60) {
-            _this.hideAddSubButtons()
-            _this.activate()
-            _this.mseconds = _this.minutes * 60000
-            _this.seconds = _this.minutes * 60
-            _this.idIntervalSeconds = setInterval(() => {
-                _this.seconds--
-                if (_this.seconds % 60 >= 10) {
-                    this.$countdown.text(Math.floor(_this.seconds / 60) + ':' + _this.seconds % 60)
-                  } else {
-                    this.$countdown.text(Math.floor(_this.seconds / 60) + ':0' + _this.seconds % 60)
-                  }
-                _this.degrees += 0.0983
-                _this.rotate(_this.degrees)
-                _this.finish(_this.seconds, _this.idIntervalMinutes, _this.idIntervalSeconds)
-              }, 1000)
-            _this.idIntervalMinutes = setInterval(() => {
-                _this.minutes--
-                _this.setTimer(_this.minutes)
-              }, 60000)
-          }
-      })
+      if ((!this.isOn) && this.minutes > 0 && this.minutes < 60) {
+        this.hideAddSubButtons()
+        this.activate()
+        this.mseconds = this.minutes * 60000
+        this.seconds = this.minutes * 60
+        this.idIntervalSeconds = setInterval(() => {
+          this.seconds--
+          if (this.seconds % 60 >= 10) {
+              this.$countdown.text(Math.floor(this.seconds / 60) + ':' + this.seconds % 60)
+            } else {
+              this.$countdown.text(Math.floor(this.seconds / 60) + ':0' + this.seconds % 60)
+            }
+          this.degrees += 0.0983
+          this.rotate(this.degrees)
+          this.finish(this.seconds, this.idIntervalMinutes, this.idIntervalSeconds)
+        }, 1000)
+        this.idIntervalMinutes = setInterval(() => {
+          this.minutes--
+          this.setTimer(this.minutes)
+        }, 60000)
+      }
+    })
   }
   rotate (deg) {
     this.$tomato.css('-webkit-transform', 'rotate(' + deg + 'deg)')
@@ -80,22 +77,21 @@ class PomodoroClock {
   }
   finish (sec, idIntMin, idIntSec) {
     if (sec === 0) {
-        clearInterval(idIntMin)
-        clearInterval(idIntSec)
-        this.soundAlarm()
-        this.restartValues()
-      }
+      clearInterval(idIntMin)
+      clearInterval(idIntSec)
+      this.soundAlarm()
+      this.restartValues()
+    }
   }
   stop () {
-    let _this = this
     this.$stop.click(() => {
-        if (_this.isOn) {
-            clearInterval(_this.idIntervalMinutes)
-            clearInterval(_this.idIntervalSeconds)
-            _this.restartValues()
-            _this.soundAlarm()
-          }
-      })
+      if (this.isOn) {
+        clearInterval(this.idIntervalMinutes)
+        clearInterval(this.idIntervalSeconds)
+        this.restartValues()
+        this.soundAlarm()
+      }
+    })
   }
   soundAlarm () {
     $('audio').get(0).play()
